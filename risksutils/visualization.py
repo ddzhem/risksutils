@@ -356,7 +356,7 @@ def _aggregate_data_for_woe_line(df, feature, target, num_buck):
     # Logistic interpolation
     clf = Pipeline([
         ('scalle', StandardScaler()),
-        ('log_reg', LogisticRegression(C=1))
+        ('log_reg', LogisticRegression(penalty='none', solver='sag'))
     ])
     clf.fit(df[[feature]], df[target])
     df_agg['logreg'] = _woe(clf.predict_proba(df_agg[[feature]])[:, 1],
